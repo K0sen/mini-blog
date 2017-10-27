@@ -8,12 +8,15 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontend',
+    'homeUrl' => '/',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    //'defaultRoute' => 'site/contact',
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'baseUrl' => '',
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -36,14 +39,23 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
+            'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'page/<page:\d+>' => 'blog/index',
+                '/' => 'blog/index',
+                'logout' => 'site/logout',
+                'signup' => 'site/signup',
+                'login' => 'site/login',
+                'post-create' => 'blog/create',
+                'blog/<id:\d+>' => 'blog/blog-list',
+                'read/<id:\d+>' => 'blog/read',
+                'update/<id:\d+>' => 'blog/update',
+                'delete/<id:\d+>' => 'blog/delete'
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

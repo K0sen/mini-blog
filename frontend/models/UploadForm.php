@@ -1,7 +1,30 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Grog
- * Date: 25.10.2017
- * Time: 18:17
- */
+namespace frontend\models;
+
+use yii\base\Model;
+use yii\web\UploadedFile;
+
+class UploadForm extends Model
+{
+    /**
+     * @var UploadedFile
+     */
+    public $imageFile;
+
+    public function rules()
+    {
+        return [
+            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+        ];
+    }
+
+    public function upload($path = "uploads/")
+    {
+        if ($this->validate()) {
+            $this->imageFile->saveAs("{$path}" . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
