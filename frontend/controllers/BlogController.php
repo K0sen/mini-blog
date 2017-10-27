@@ -162,14 +162,19 @@ class BlogController extends Controller
         $model = $this->findModel($id);
         $upload = new UploadForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['read', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
+        if ($model->load(Yii::$app->request->post())) {
+            $upload->imageFile = UploadedFile::getInstance($upload, 'imageFile');
+            if ($upload->imageFile && $upload->upload("uploads/pictures/"))
+                $model->image = $upload->imageFile->baseName . "." . $upload->imageFile->extension;
+
+            if ($model->save()) {
+                return $this->redirect(['read', 'id' => $model->id]);
+            }
+        }
+        return $this->render('update', [
                 'model' => $model,
                 'upload' => $upload
-            ]);
-        }
+        ]);
     }
 
     /**
