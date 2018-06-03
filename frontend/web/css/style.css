@@ -1,41 +1,40 @@
 .wrap >.container {
-    margin-top: 50px;
+    margin-top: 100px;
 }
 
 /*Index view*/
 
-.news {
+.post {
     position: relative;
     text-align: center;
 }
 
-.news div {
+.post div {
     margin-bottom: 15px;
 }
 
-.news__image {
+.post__image {
     text-align: center;
     margin: 0 auto;
     max-width: 500px;
     max-height: 400px;
 }
 
-.news__image img {
-    width: 100%;
-    height: 100%;
+.post__image img {
+    display: inline-block;
 }
 
-.news__title a {
+.post__title a {
     color: black;
     font-weight: bold;
     text-decoration: none;
 }
 
-.news__text {
+.post__text {
     text-align: justify;
 }
 
-.news__control_panel {
+.post__control_panel {
     top: 15px;
     right: 0;
     position: absolute;
@@ -55,9 +54,10 @@
 }
 
 .comment {
+    margin-left: 15px;
     padding-left: 10px;
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
+    border-left: 1px dotted black;
+    border-bottom: 1px dotted black;
 }
 
 .comment__author {
@@ -69,8 +69,17 @@
     margin-left: 20px;
 }
 
-.comment_send {
-    display: none;
+.comment__reply {
+    display: inline-block;
+    color: blue;
+    font-style: italic;
+    cursor: pointer;
+}
+
+/* Comment form */
+
+.comment_send .form-group {
+    
 }
 
 /* Upload view */

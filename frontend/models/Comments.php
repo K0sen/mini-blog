@@ -12,7 +12,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $blog_id
  * @property integer $user_id
  * @property string $comment
- * @property integer $parent_comment
+ * @property integer $parent_id
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -43,7 +43,7 @@ class Comments extends \yii\db\ActiveRecord
     {
         return [
             [['blog_id', 'user_id', 'comment'], 'required'],
-            [['blog_id', 'user_id', 'parent_comment', 'created_at', 'updated_at'], 'integer'],
+            [['blog_id', 'user_id', 'parent_id', 'created_at', 'updated_at'], 'integer'],
             [['comment'], 'string', 'max' => 200],
             [['blog_id'], 'exist', 'skipOnError' => true, 'targetClass' => Blog::className(), 'targetAttribute' => ['blog_id' => 'id']],
             ['verifyCode', 'captcha', 'captchaAction' => 'site/captcha'],
@@ -60,7 +60,7 @@ class Comments extends \yii\db\ActiveRecord
             'blog_id' => 'Blog ID',
             'user_id' => 'User ID',
             'comment' => 'Comment',
-            'parent_comment' => 'Parent Comment',
+            'parent_id' => 'Parent comment ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];

@@ -20,14 +20,34 @@ $(document).ready(function() {
     });
 
     $('.add_comment').on('click', function() {
-        $(this).siblings('.comment_send').show(600, function() {
-            $(this).find('textarea').on('change', function() {
-                if ($(this).val() == '')
-                    $(this).siblings('.btn').attr('disabled', true);
-                else
-                    $(this).siblings('.btn').attr('disabled', false);
-            });
-            $(this).siblings('.add_comment').hide();
+        var post_id = $(this).parents('.post').children('.post__id').val();
+        var csrfToken = $('meta[name="csrf-token"]').attr("content");
+        var id = $(this).siblings('.comment__id').val();
+        if (!id)
+            id = 0;
+
+        $.ajax({
+            url: '/comment/form',
+            type: 'post',
+            data: {
+                parent_id : id,
+                post_id : post_id,
+                '_csrf-frontend' : csrfToken
+            },
+            success: function (data) {
+                $('.comment_send').remove();
+                if (id != 0) {
+                    $('.comment input[value='+id+']').siblings('.add_comment').before(data);
+                }
+                else {
+                    $('.post input[value='+post_id+']').siblings('.add_comment').before(data);
+                }
+
+                $('.comment_send_close').on('click', function() {
+                    console.log(123);
+                    $('.comment_send').remove();
+                });
+            }
         });
     });
 

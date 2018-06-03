@@ -48,7 +48,7 @@ CREATE TABLE `comments` (
   `blog_id` int(11) NOT NULL,
   `user_id` int(10) NOT NULL,
   `comment` varchar(200) NOT NULL,
-  `parent_comment` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL,
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -156,6 +156,7 @@ ALTER TABLE `blog`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  -- ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`blog_id`) REFERENCES `blog` (`id`),
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

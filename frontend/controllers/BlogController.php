@@ -70,6 +70,10 @@ class BlogController extends Controller
 //        ]);
 //    }
 
+    /**
+     * Main page
+     * @return string
+     */
     public function actionIndex()
     {
         $query = Blog::find();
@@ -92,6 +96,12 @@ class BlogController extends Controller
         ]);
     }
 
+    /**
+     * Page with all posts of certain user
+     * @param $id
+     * @return string
+     * @throws \yii\web\HttpException
+     */
     public function actionBlogList($id)
     {
         $posts = Blog::find()->where(['user_id' => $id])->all();
@@ -138,13 +148,20 @@ class BlogController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $upload->imageFile = UploadedFile::getInstance($upload, 'imageFile');
-            if ($upload->imageFile && $upload->upload("uploads/pictures/"))
-                $model->image = $upload->imageFile->baseName . "." . $upload->imageFile->extension;
-
-            if ($model->save()) {
-                return $this->redirect(['read', 'id' => $model->id]);
+            if ($upload->imageFile) {
+                $path = "uploads/pictures/";
+                $filename = $upload->formFilename($path);
+                $model->image = $filename . '.' . $upload->imageFile->extension;
+                if ($upload->upload($path, $filename) && $model->save()) {
+                    return $this->redirect(['read', 'id' => $model->id]);
+                }
+            } else {
+                if ($model->save()) {
+                    return $this->redirect(['read', 'id' => $model->id]);
+                }
             }
         }
+
         return $this->render('create', [
             'model' => $model,
             'upload' => $upload
@@ -164,13 +181,20 @@ class BlogController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $upload->imageFile = UploadedFile::getInstance($upload, 'imageFile');
-            if ($upload->imageFile && $upload->upload("uploads/pictures/"))
-                $model->image = $upload->imageFile->baseName . "." . $upload->imageFile->extension;
-
-            if ($model->save()) {
-                return $this->redirect(['read', 'id' => $model->id]);
+            if ($upload->imageFile) {
+                $path = "uploads/pictures/";
+                $filename = $upload->formFilename($path);
+                $model->image = $filename . '.' . $upload->imageFile->extension;
+                if ($upload->upload($path, $filename) && $model->save()) {
+                    return $this->redirect(['read', 'id' => $model->id]);
+                }
+            } else {
+                if ($model->save()) {
+                    return $this->redirect(['read', 'id' => $model->id]);
+                }
             }
         }
+
         return $this->render('update', [
                 'model' => $model,
                 'upload' => $upload

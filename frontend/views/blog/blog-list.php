@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php foreach ($posts as $post) :
     $blog_comments = isset($comments[$post['id']]) ? $comments[$post['id']] : null;
     ?>
-    <div class="news">
+    <div class="post">
         <?= $this->render('_post', [
             'post' => $post,
             'comments' => $blog_comments,

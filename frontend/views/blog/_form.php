@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'allow_comments')->checkbox() ?>
 
-    <label for="blog__add_img"><input type="checkbox" class="blog__add_img"> Add Image</label>
+    <label for="blog__add_img"><input type="checkbox" class="blog__add_img"> Add/Change image</label>
 
     <div class="blog__upload_img">
         <?= $form->field($upload, 'imageFile')->fileInput(['class' => 'file']) ?>
