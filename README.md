@@ -1,9 +1,13 @@
 Версия PHP: 7.1.4
+
 Версия MySQL сервера: 10.1.22-MariaDB
+
 Версия Apache сервера: 2.4.25 (Win32)
 
 Настройка файлов httpd-vhosts.conf и .htaccess производилась по этому мануалу https://github.com/mickgeek/yii2-advanced-one-domain-config
+
 Структура базы данных в файле mini-blog.sql, который находится в корне проекта.
+
 P.S. Извините за баги и недочеты.
 
 ===============================
